@@ -7,9 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @see NewOrderResponse
@@ -28,22 +26,25 @@ public class NewOrderResponseTest {
 
   @Test
   public void shouldHandleToStringWithNullFills() {
-    assertThat(newOrderResponse.toString(), containsString(",fills="));
+    assertThat(newOrderResponse.toString())
+      .contains(",fills=");
   }
 
   @Test
   public void shouldHandleToStringWithNoFills() {
     newOrderResponse.setFills(Collections.emptyList());
-    assertThat(newOrderResponse.toString(), containsString(",fills="));
+    assertThat(newOrderResponse.toString())
+      .contains(",fills=");
   }
 
   @Test
   public void shouldHandleToStringWithFills() {
     newOrderResponse.setFills(trades(trade));
-    assertThat(newOrderResponse.toString(), containsString(",fills=Trade[id=123,"));
+    assertThat(newOrderResponse.toString())
+      .contains(",fills=Trade[id=123,");
   }
 
   private static List<Trade> trades(final Trade... trades) {
     return Arrays.asList(trades);
   }
-} 
+}
